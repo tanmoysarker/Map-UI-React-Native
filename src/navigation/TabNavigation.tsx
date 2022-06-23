@@ -10,23 +10,6 @@ import RoomsScreen from "../view/Rooms/RoomsScreen";
 import CountersScreen from "../view/Counters/CountersScreen";
 import {COUNTERS_SCREEN, DEVICES_SCREEN, HOME_SCREEN, ROOMS_SCREEN, SETTINGS_SCREEN} from "./routes";
 
-import HomeLogoLight from "../assets/navigation/light/home_active_light.svg";
-import DevicesLogoLight from "../assets/navigation/light/devices_active_light.svg";
-import RoomsLogoLight from "../assets/navigation/light/rooms_active_light.svg";
-import CountersLogoLight from "../assets/navigation/light/counters_active_light.svg";
-import SettingsLogoLight from "../assets/navigation/light/settings_active_light.svg";
-
-import HomeLogoDark from "../assets/navigation/dark/home_active_dark.svg";
-import DevicesLogoDark from "../assets/navigation/dark/devices_active_dark.svg";
-import RoomsLogoDark from "../assets/navigation/dark/rooms_active_dark.svg";
-import CountersLogoDark from "../assets/navigation/dark/counters_active_dark.svg";
-import SettingsLogoDark from "../assets/navigation/dark/settings_active_dark.svg";
-
-import HomeLogoDefault from "../assets/navigation/Home_inactive.svg";
-import DevicesLogoDefault from "../assets/navigation/Controls_inactive.svg";
-import RoomsLogoDefault from "../assets/navigation/Room_inactive.svg";
-import CountersLogoDefault from "../assets/navigation/Counters_inactive.svg";
-import SettingsLogoDefault from "../assets/navigation/Settings_inactive.svg";
 
 import Icon from 'react-native-vector-icons/Feather';
 import IconFirst from 'react-native-vector-icons/Entypo';
@@ -100,7 +83,7 @@ const getTabBarIcon = (routeName: String, theme: String, focused: boolean): JSX.
             return (
                 <View style={styles.tabButton}>
                     {theme === "light" ?
-                            <RoomsLogoLight /> : <RoomsLogoDark /> 
+                            <Icon name="plus" size={30} color="#FFFFFF"/> : <Icon name="plus" size={30} color="#FFFFFF"/>
                     }
                 </View>
             );
