@@ -246,7 +246,8 @@ const styles = StyleSheet.create({
     },
     rightContainerDark:{
       height: 50,
-      borderRadius: 5,
+      borderTopRightRadius: 5,
+      borderBottomRightRadius: 5,
       alignSelf: 'center',
       backgroundColor: '#333333'
     }

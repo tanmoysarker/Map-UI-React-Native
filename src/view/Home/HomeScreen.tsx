@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import { connect } from "react-redux";
 import { SafeAreaView, StatusBar, StyleSheet, Text, View, Dimensions, Platform, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import globalStyles from "../Common/globalStyles";
@@ -25,8 +25,8 @@ const markers = [
     longitude: -122.4324,
     image: require('../../assets/beer.png'),
     backgroundimage: require('../../assets/bar.jpg'),
-    text: 'Lokal Hamburk',
-    desc: 'Pub in Prague'
+    title: 'Lokal Hamburk',
+    desc: 'Pub in Prague',
   },
   {
     id: 1,
@@ -34,7 +34,7 @@ const markers = [
     longitude: -122.4325,
     image: require('../../assets/burger.png'),
     backgroundimage: require('../../assets/resturant.jpg'),
-    text: 'Burger Point',
+    title: 'Burger Point',
     desc: 'Resturant in Prague'
   },
   {
@@ -43,7 +43,7 @@ const markers = [
     longitude: -122.4537,
     image: require('../../assets/glass.png'),
     backgroundimage: require('../../assets/bar.jpg'),
-    text: 'Drink & Dine',
+    title: 'Drink & Dine',
     desc: 'Pub in Prague'
   },
   {
@@ -52,7 +52,7 @@ const markers = [
     longitude: -122.4456,
     image: require('../../assets/cup.png'),
     backgroundimage: require('../../assets/cafe.jpg'),
-    text: 'Coffee House',
+    title: 'Coffee House',
     desc: 'Cafe in Prague'
   },
   {
@@ -61,7 +61,7 @@ const markers = [
     longitude: -122.4147,
     image: require('../../assets/sushi.png'),
     backgroundimage: require('../../assets/resturant.jpg'),
-    text: 'Sushi House',
+    title: 'Sushi House',
     desc: 'Resturant in Prague'
   },
   {
@@ -70,7 +70,7 @@ const markers = [
     longitude: -122.4147,
     image: require('../../assets/cup.png'),
     backgroundimage: require('../../assets/cafe.jpg'),
-    text: 'Starbucks',
+    title: 'Starbucks',
     desc: 'Cafe in Prague'
   },
   {
@@ -79,7 +79,7 @@ const markers = [
     longitude: -122.4147,
     image: require('../../assets/glass.png'),
     backgroundimage: require('../../assets/bar.jpg'),
-    text: 'Wine Shop',
+    title: 'Wine Shop',
     desc: 'Pub in Prague'
   },
   {
@@ -88,7 +88,7 @@ const markers = [
     longitude: -122.4454,
     image: require('../../assets/beer.png'),
     backgroundimage: require('../../assets/bar.jpg'),
-    text: 'Local Pub',
+    title: 'Local Pub',
     desc: 'Pub in Prague'
   }
 ]
@@ -97,12 +97,7 @@ const HomeScreen = (props: HomeScreenProps) => {
   const { theme } = props.navigation
   const mapRef = React.createRef();
   const searchRef = React.useRef(null)
-  const dropdownController = React.useRef(null)
 
-  const [text, onChangeText] = React.useState("");
-  const [query, setQuery] = React.useState('');
-  const [suggestionsList, setSuggestionsList] = React.useState(markers)
-  const [searchSelectedItem, setSearchSelectedItem] = React.useState(null);
   const [selectedItem, setSelectedItem] = React.useState(null)
   const [selectedLocation, setSelectedLocation] = React.useState([]);
 
@@ -119,21 +114,13 @@ const HomeScreen = (props: HomeScreenProps) => {
   }
 
   const selectLocation = (id: number) => {
-    var selectedMarker = markers.filter(x=> x.id === id)
+    var selectedMarker = markers.filter(x => x.id === id)
     setSelectedLocation(selectedMarker);
   }
 
-  const onClearPress = useCallback(() => {
-    setSuggestionsList(null)
-  }, [])
-
-  const onOpenSuggestionsList = useCallback(isOpened => {}, [])
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
-
       <View style={styles.container}>
-
         <MapView
           ref={mapRef}
           style={styles.mapStyle}
@@ -161,7 +148,7 @@ const HomeScreen = (props: HomeScreenProps) => {
                 }
                 title={x.text}
                 description={x.desc}
-                onPress={()=>selectLocation(x.id)}
+                onPress={() => selectLocation(x.id)}
               >
                 <Image source={x.image} style={{ height: 35, width: 35 }} />
               </Marker>
@@ -172,70 +159,39 @@ const HomeScreen = (props: HomeScreenProps) => {
         </MapView>
 
         <View style={theme === "light" ? styles.searchBarLight : styles.searchBarDark}>
-          <SearchIcon name="search" size={30} color='#5B5B5B' style={{marginLeft:10}}/>
-          {/* <TextInput
-            style={styles.input}
-            onChangeText={onChangeText}
-            value={text}
-            placeholder="Search here"
-            placeholderTextColor={'#5B5B5B'}
-          /> */}
-           {/* <AutocompleteDropdown
-              clearOnFocus={false}
-              closeOnBlur={true}
-              closeOnSubmit={false}
-              initialValue={{ id: '2' }} 
-              // onSelectItem={setSearchSelectedItem}
-              dataSet={[
-                { id: '1', title: 'Alpha' },
-                { id: '2', title: 'Beta' },
-                { id: '3', title: 'Gamma' },
-              ]}
-            /> */}
-              <AutocompleteDropdown
-                ref={searchRef}
-                controller={controller => {
-                  dropdownController.current = controller
-                }}
-                // initialValue={'1'}
-                direction={Platform.select({ ios: 'down' })}
-                dataSet={markers}
-                // onChangeText={getSuggestions}
-                onSelectItem={item => {console.log('text')}}
-                debounce={600}
-                suggestionsListMaxHeight={Dimensions.get('window').height * 0.4}
-                onClear={onClearPress}
-                onSubmit={(e) => console.log(e)}
-                onOpenSuggestionsList={onOpenSuggestionsList}
-                useFilter={false} 
-                textInputProps= {theme === "light" ? {
-                  placeholder: 'Search here',
-                  autoCorrect: false,
-                  autoCapitalize: 'none',
-                  style: styles.searchInputLight,
-                } : {
-                  placeholder: 'Search here',
-                  autoCorrect: false,
-                  autoCapitalize: 'none',
-                  style: styles.searchInputDark,
-                }}
-                rightButtonsContainerStyle={theme === "light" ? styles.rightContainerLight : styles.rightContainerDark}
-                suggestionsListContainerStyle={theme === "light" ? styles.suggestionContainerLight : styles.suggestionContainerDark}
-                containerStyle={{ flexGrow: 1, flexShrink: 1 }}
-                renderItem={(item, text) => (
-                  <View style={{flexDirection:'row'}}>
-                    <Image source={item.backgroundimage} style={{ height: 45, width: 45 }} />
-                    <Text style={theme === "light" ? styles.itemTextLight: styles.itemTextDark}>{item.text}</Text>
-                  </View>
-                )
-                }
-                ChevronIconComponent={<Feather name="chevron-down" size={20} color="#fff" />}
-                ClearIconComponent={<Feather name="x-circle" size={18} color= {theme === "light" ? "#333333" : '#FFFFFF'} />}
-                inputHeight={50}
-                showChevron={false}
-                closeOnBlur={false}
-                //  showClear={false}
-              />
+          <SearchIcon name="search" size={30} color='#5B5B5B' style={{ marginLeft: 10 }} />
+          <AutocompleteDropdown
+            ref={searchRef}
+            clearOnFocus={false}
+            closeOnBlur={true}
+            closeOnSubmit={false}
+            initialValue={{ id: '0' }}
+            onSelectItem={setSelectedItem}
+            dataSet={markers}
+            textInputProps={theme === "light" ? {
+              placeholder: 'Search here',
+              autoCorrect: false,
+              autoCapitalize: 'none',
+              style: styles.searchInputLight,
+            } : {
+              placeholder: 'Search here',
+              autoCorrect: false,
+              autoCapitalize: 'none',
+              style: styles.searchInputDark,
+            }}
+            rightButtonsContainerStyle={theme === "light" ? styles.rightContainerLight : styles.rightContainerDark}
+            suggestionsListContainerStyle={theme === "light" ? styles.suggestionContainerLight : styles.suggestionContainerDark}
+            containerStyle={{ flexGrow: 1, flexShrink: 1 }}
+            renderItem={(item, text) => (
+              <View style={{ flexDirection: 'row' }}>
+                <Image source={item.backgroundimage} style={{ height: 45, width: 45 }} />
+                <Text style={theme === "light" ? styles.itemTextLight : styles.itemTextDark}>{item.title}</Text>
+              </View>
+            )
+            }
+            ClearIconComponent={<Feather name="x-circle" size={18} color={theme === "light" ? "#333333" : '#FFFFFF'} />}
+            inputHeight={50}
+          />
         </View>
 
         <TouchableOpacity onPress={() => {
@@ -254,15 +210,15 @@ const HomeScreen = (props: HomeScreenProps) => {
           </View>
         </TouchableOpacity>
 
-        {selectedLocation.map((marker, index) =>(
+        {selectedLocation.map((marker, index) => (
           <View style={theme === "light" ? styles.cardLight : styles.cardDark} key={index}>
-            <Image 
+            <Image
               source={marker.backgroundimage}
               style={styles.cardImage}
               resizeMode="cover"
             />
             <View>
-              <Text numberOfLines={1} style={theme === "light" ? styles.cardtitleLight : styles.cardtitleDark}>{marker.text}</Text>
+              <Text numberOfLines={1} style={theme === "light" ? styles.cardtitleLight : styles.cardtitleDark}>{marker.title}</Text>
               <Text numberOfLines={1} style={styles.cardDescription}>{marker.desc}</Text>
             </View>
           </View>
