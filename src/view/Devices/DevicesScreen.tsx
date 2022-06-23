@@ -12,7 +12,7 @@ const DevicesScreen = (props: DevicesScreenProps) => {
             <Text
                 style={theme === "light" ? globalStyles.textLight : globalStyles.textDark}
             >
-                Devices
+                Second Screen
             </Text>
         </SafeAreaView>
     );

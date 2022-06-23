@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFFFFF',
       position: 'absolute',
       right: 25,
-      top: Platform.OS === 'ios' ? 150 : 120,
+      top: Platform.OS === 'ios' ? 160 : 130,
       borderRadius: 50,
       justifyContent: 'center',
       alignItems: 'center',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#333333',
       position: 'absolute',
       right: 25,
-      top: Platform.OS === 'ios' ? 150 : 120,
+      top: Platform.OS === 'ios' ? 160 : 130,
       borderRadius: 50,
       justifyContent: 'center',
       alignItems: 'center',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFFFFF',
       position: 'absolute',
       right: 25,
-      top: Platform.OS === 'ios' ? 210 : 180,
+      top: Platform.OS === 'ios' ? 230 : 200,
       borderRadius: 50,
       justifyContent: 'center',
       alignItems: 'center',
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#333333',
       position: 'absolute',
       right: 25,
-      top: Platform.OS === 'ios' ? 210 : 180,
+      top: Platform.OS === 'ios' ? 230 : 200,
       borderRadius: 50,
       justifyContent: 'center',
       alignItems: 'center',
@@ -212,7 +212,6 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFFFFF',
       color: '#000',
       borderWidth: 0
-      
     },
     searchInputDark: {
       borderTopRightRadius: 10,
@@ -240,16 +239,17 @@ const styles = StyleSheet.create({
     },
     rightContainerLight: {
       height: 50,
-      borderRadius: 5,
+      borderRadius: 10,
       alignSelf: 'center',
-      backgroundColor: '#FFFFFF'
+      backgroundColor: '#FFFFFF',
+      left:1
     },
     rightContainerDark:{
       height: 50,
-      borderTopRightRadius: 5,
-      borderBottomRightRadius: 5,
+      borderTopRightRadius: 10,
+      borderBottomRightRadius: 10,
       alignSelf: 'center',
-      backgroundColor: '#333333'
+      left:1
     }
   });
 

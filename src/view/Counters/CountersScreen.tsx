@@ -12,7 +12,7 @@ const CountersScreen = (props: CountersScreenProps) => {
             <Text
                 style={theme === "light" ? globalStyles.textLight : globalStyles.textDark}
             >
-                Counters
+                Third Screen
             </Text>
         </SafeAreaView>
     );

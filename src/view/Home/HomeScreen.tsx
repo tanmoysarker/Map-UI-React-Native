@@ -10,10 +10,7 @@ import LocationIcon from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown';
 
-
-
 import styles from './styles';
-
 import mapStyleLight from './mapStyleLight.json';
 import mapStyleDark from './mapStyleDark.json';
 
@@ -189,8 +186,9 @@ const HomeScreen = (props: HomeScreenProps) => {
               </View>
             )
             }
-            ClearIconComponent={<Feather name="x-circle" size={18} color={theme === "light" ? "#333333" : '#FFFFFF'} />}
+            ClearIconComponent={<Feather name="x-circle" size={18} color={ "#333333" } />}
             inputHeight={50}
+            showChevron={false}
           />
         </View>
 
@@ -199,14 +197,14 @@ const HomeScreen = (props: HomeScreenProps) => {
         }}
         >
           <View style={theme === "light" ? styles.toogleBarLight : styles.toogleBarDark}>
-            <Icon name="md-options-outline" size={30} color={theme === "light" ? "#000" : '#FFFFFF'} />
+            <Icon name="md-options-outline" size={25} color={theme === "light" ? "#000" : '#FFFFFF'} />
           </View>
 
         </TouchableOpacity>
 
         <TouchableOpacity onPress={changeRegion}>
           <View style={theme === "light" ? styles.locationBarLight : styles.locationBarDark}>
-            <LocationIcon name="location-arrow" size={30} color={theme === "light" ? "#000" : '#FFFFFF'} />
+            <LocationIcon name="location-arrow" size={25} color={theme === "light" ? "#000" : '#FFFFFF'} />
           </View>
         </TouchableOpacity>
 

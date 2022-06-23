@@ -12,7 +12,7 @@ const RoomsScreen = (props: RoomScreenProps) => {
             <Text
                 style={theme === "light" ? globalStyles.textLight : globalStyles.textDark}
             >
-                Rooms
+                Third Screen
             </Text>
         </SafeAreaView>
     );
